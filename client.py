@@ -18,7 +18,6 @@ while True:
         cv2.rectangle(frame, (x,y), (x+w,y+h), (3400,1234,2500), 5)
         sub_face = frame[y:y+h, x:x+w]
         encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
-        #encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
         result, imgencode = cv2.imencode('.jpg', sub_face, encode_param)
         data = numpy.array(imgencode)
         stringData = data.tostring()
