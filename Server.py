@@ -1,14 +1,14 @@
 import socket
 import cv2
 import numpy
-
-def recvall(sock, count):
+#logic for buffer creation how to allocate a space for that buffer..
+def call(sock, count):
     buf = b''
     while count:
-        newbuf = sock.recv(count)
-        if not newbuf: return None
-        buf += newbuf
-        count -= len(newbuf)
+        buff = sock.recv(count)
+        if not buff: return None
+        buf += buff
+        count -= len(buff)
     return buf
 
 TCP_IP = '192.168.0.102'
@@ -19,8 +19,8 @@ s.bind((TCP_IP, TCP_PORT))
 s.listen(True)
 conn, addr = s.accept()
 
-length = recvall(conn,16)
-stringData = recvall(conn, int(length))
+length = int(call(conn,16))
+stringData = call(conn, length)
 data = numpy.fromstring(stringData, dtype='uint8')
 s.close()
 
